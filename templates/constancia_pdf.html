@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <style>
+        @page {
+            size: letter portrait;
+            margin: 20pt 35pt 20pt 35pt;
+        }
+
+        body {
+            font-family: Helvetica, Arial, sans-serif;
+            font-size: 9.5pt;
+            color: #111111;
+            line-height: 1.25;
+        }
+
+        /* Encabezado */
+        .header-table {
+            width: 100%;
+            margin-bottom: 15px;
+            border-collapse: collapse;
+        }
+
+        .logo-box {
+            background-color: #3f3f3f;
+            color: #ffffff;
+            padding: 8px 12px;
+            width: 55%;
+            vertical-align: middle;
+        }
+
+        .logo-box .brand {
+            font-size: 22pt;
+            font-weight: bold;
+            font-family: "Times New Roman", serif;
+            display: inline-block;
+            margin-right: 10px;
+        }
+
+        .logo-box .subtext {
+            font-size: 7.5pt;
+            letter-spacing: 0.5px;
+            line-height: 1.1;
+        }
+
+        .icon-box {
+            width: 45%;
+            text-align: right;
+            vertical-align: middle;
+        }
+
+        /* Sección Metadatos */
+        .meta-table {
+            width: 100%;
+            margin-bottom: 12px;
+            border-collapse: collapse;
+        }
+
+        .meta-table td {
+            vertical-align: top;
+            padding: 1px 0;
+            font-size: 8.5pt;
+        }
+
+        .label {
+            font-weight: bold;
+            display: inline-block;
+            width: 60px;
+        }
+
+        /* Texto intro */
+        .statement {
+            font-size: 8.5pt;
+            margin-bottom: 8px;
+            color: #333333;
+        }
+
+        /* Tabla Equipos */
+        .equipos-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 12px;
+        }
+
+        .equipos-table th {
+            background-color: #404040;
+            color: #ffffff;
+            font-size: 8pt;
+            font-weight: bold;
+            padding: 4px;
+            text-align: center;
+            border: 0.5pt solid #404040;
+        }
+
+        .equipos-table td {
+            border: 0.5pt solid #777777;
+            padding: 4px;
+            font-size: 8pt;
+            text-align: center;
+        }
+
+        /* Texto Compromiso */
+        .disclaimer-title {
+            font-size: 8pt;
+            margin-bottom: 4px;
+        }
+
+        .disclaimer-text {
+            font-size: 7.5pt;
+            text-align: center;
+            color: #222222;
+            margin-bottom: 25px;
+            padding: 0 10px;
+        }
+
+        /* Firmas y Cierre */
+        .signature-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+
+        .signature-table td {
+            font-size: 8.5pt;
+            padding: 4px 0;
+        }
+
+        .line-input {
+            border-bottom: 0.8pt solid #000000;
+            min-height: 16px;
+        }
+
+        .signature-img {
+            max-height: 45px;
+            display: block;
+        }
+
+        /* Pie de página */
+        .footer {
+            position: fixed;
+            bottom: 0px;
+            left: 0px;
+            right: 0px;
+            text-align: center;
+            font-size: 8pt;
+            font-weight: bold;
+            color: #333333;
+            border-top: 0.5pt solid #cccccc;
+            padding-top: 4px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Encabezado con logo corporativo -->
+    <table class="header-table">
+        <tr>
+            <td class="logo-box">
+                <table style="width:100%;">
+                    <tr>
+                        <td style="width:25%; vertical-align:middle;">
+                            <span class="brand">Saúl</span>
+                        </td>
+                        <td style="width:75%; vertical-align:middle; color:#ffffff; font-size:7pt; line-height:1.1;">
+                            CORPORACIÓN MERINO, S.A.<br>
+                            GERENCIA DE INFORMÁTICA
+                        </td>
+                    </tr>
+                </table>
+            </td>
+            <td class="icon-box">
+                <!-- Dibujo o texto representativo -->
+                <span style="font-size: 16pt; font-weight: bold; font-family: 'Courier New', monospace;">🦙</span>
+            </td>
+        </tr>
+    </table>
+
+    <!-- Bloque de Información Superior -->
+    <table class="meta-table">
+        <tr>
+            <td style="width: 55%;">
+                <span class="label">Nombre:</span> {{ c.nombre }}<br>
+                <span class="label">Área:</span> {{ c.area }}<br><br>
+                <span class="label">Puesto:</span> {{ c.puesto }}<br>
+                <span class="label">Fecha:</span> {{ c.fecha }}<br>
+                <span class="label">Plaza:</span> {{ c.plaza }}
+            </td>
+            <td style="width: 45%;">
+                <span class="label" style="width:70px;">Gerencia:</span> {{ c.gerencia }}<br>
+                <span class="label" style="width:70px;">Sitio:</span> {{ c.sitio }}<br><br>
+                <span class="label" style="width:70px;">Técnico:</span> {{ c.tecnico }}<br>
+                <span class="label" style="width:70px;">Asunto:</span> {{ c.asunto }}<br>
+                <span class="label" style="width:70px;">Licencia:</span> {{ c.licencia }}
+            </td>
+        </tr>
+    </table>
+
+    <div class="statement">
+        Por medio del presente se hace constar la entrega del equipo detallado a continuación:
+    </div>
+
+    <!-- Tabla del Detalle de Equipos -->
+    <table class="equipos-table">
+        <thead>
+            <tr>
+                <th style="width: 25%;">EQUIPO</th>
+                <th style="width: 20%;">MARCA</th>
+                <th style="width: 25%;">MODELO</th>
+                <th style="width: 20%;">SERIE</th>
+                <th style="width: 10%;">ESTADO</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in c.equipos %}
+            <tr>
+                <td>{{ item.equipo }}</td>
+                <td>{{ item.marca }}</td>
+                <td>{{ item.modelo }}</td>
+                <td>{{ item.serie }}</td>
+                <td>{{ item.estado }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <div class="disclaimer-title">
+        Se recibe el equipo anteriormente detallado.
+    </div>
+    <div class="disclaimer-text">
+        El cual me comprometo a cuidar, mantener en buen estado y utilizarla única y exclusivamente para asuntos relacionados con mi actividad laboral.<br>
+        En caso de su extravío, daño o uso inadecuado, me responsabilizo a pagar el costo de reparación o la reposición del equipo.
+    </div>
+
+    <!-- Sección de Firmas y Responsables -->
+    <table class="signature-table">
+        <tr>
+            <td style="width: 22%; font-weight: bold;">Fecha:</td>
+            <td style="width: 78%; text-decoration: underline;">{{ c.fecha }}</td>
+        </tr>
+        <tr>
+            <td style="font-weight: bold;">Nombre de quien entrega:</td>
+            <td style="border-bottom: 0.5pt solid #000000;">{{ c.nombre_entrega }}</td>
+        </tr>
+        <tr>
+            <td style="font-weight: bold;">Nombre de quien recibe:</td>
+            <td style="border-bottom: 0.5pt solid #000000; font-weight: bold;">{{ c.nombre }}</td>
+        </tr>
+        <tr>
+            <td style="font-weight: bold; vertical-align: top; padding-top: 15px;">Firma:</td>
+            <td style="padding-top: 10px;">
+                {% if c.firma_base64 %}
+                    <img src="{{ c.firma_base64 }}" class="signature-img" />
+                {% else %}
+                    <div style="border-bottom: 0.5pt solid #000000; width: 60%; height: 30px;"></div>
+                {% endif %}
+            </td>
+        </tr>
+    </table>
+
+    <!-- Pie de página constante -->
+    <div class="footer">
+        Corporación Merino, Avenida el Ferrocarril 19-97 zona 12, Bodega 702 Cortijo Empresarial 1
+    </div>
+
+</body>
+</html>

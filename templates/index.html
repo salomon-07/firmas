@@ -9,12 +9,12 @@
 <body>
     <header class="header">
         <div class="logo">
-            <h1>Automat.</h1>
+            <h1>Automat.</h1>   
             <span>entrega y recepcion de equipos</span>
         </div>
-        <button id="btnScanner" class="btn-scanner"><!-- cambiar clase en css y el id -->
+        <button id="btnScanner" class="btn-scanner" onclick="document.getElementById('formConstancia').submit()">
             Descargar Constancia
-        </button>
+        </button>   
     </header>
     <div class="layout">
         <aside class="sidebar">
@@ -29,10 +29,129 @@
                     <p>Creacion de constancias para la entrega y la recepcion de equipos</p>
                 </div>
             </section>
-            <section>
-                <h4>En este espacio va el formulario</h3>
+            
+            <section class="form-container">
+                <form id="formConstancia" action="/guardar" method="POST">
+                    <!-- Datos del Colaborador y Datos de IT -->
+                    <div class="form-grid">
+                        <div class="card">
+                            <h3>Datos del Receptor / Colaborador</h3>
+                            <div class="field-group">
+                                <label>Nombre Completo:</label>
+                                <input type="text" name="nombre" placeholder="Ej. MELANIE ANDREA MELÉNDEZ" required>
+                            </div>
+                            <div class="field-group">
+                                <label>Área:</label>
+                                <input type="text" name="area" placeholder="Ej. Atracción y Selección" required>
+                            </div>
+                            <div class="field-group">
+                                <label>Puesto:</label>
+                                <input type="text" name="puesto" placeholder="Ej. Oficial de Atracción y Selección" required>
+                            </div>
+                            <div class="form-row">
+                                <div class="field-group">
+                                    <label>Fecha:</label>
+                                    <input type="text" name="fecha" value="17/09/2026" required>
+                                </div>
+                                <div class="field-group">
+                                    <label>Plaza:</label>
+                                    <input type="text" name="plaza" value="Existente" required>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <h3>Información del Servicio (IT)</h3>
+                            <div class="field-group">
+                                <label>Gerencia:</label>
+                                <input type="text" name="gerencia" value="Gerencia IT" required>
+                            </div>
+                            <div class="field-group">
+                                <label>Sitio:</label>
+                                <input type="text" name="sitio" placeholder="Ej. CDO" required>
+                            </div>
+                            <div class="field-group">
+                                <label>Técnico:</label>
+                                <input type="text" name="tecnico" placeholder="Ej. Jorge Espejel" required>
+                            </div>
+                            <div class="form-row">
+                                <div class="field-group">
+                                    <label>Asunto:</label>
+                                    <input type="text" name="asunto" value="Entrega de equipo" required>
+                                </div>
+                                <div class="field-group">
+                                    <label>Licencia:</label>
+                                    <input type="text" name="licencia" value="Básica" required>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tabla Dinámica de Equipos -->
+                    <div class="card full-width">
+                        <div class="card-header-flex">
+                            <h3>Detalle de Equipos</h3>
+                            <button type="button" class="btn-secondary" id="btnAddRow">+ Agregar Equipo</button>
+                        </div>
+                        <table class="data-table" id="tableEquipos">
+                            <thead>
+                                <tr>
+                                    <th>EQUIPO</th>
+                                    <th>MARCA</th>
+                                    <th>MODELO</th>
+                                    <th>SERIE</th>
+                                    <th>ESTADO</th>
+                                    <th>ACCIONES</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><input type="text" name="equipo[]" value="Laptop" required></td>
+                                    <td><input type="text" name="marca[]" value="DELL" required></td>
+                                    <td><input type="text" name="modelo[]" value="LATITUDE 3420" required></td>
+                                    <td><input type="text" name="serie[]" value="DT6VGL3" required></td>
+                                    <td><input type="text" name="estado[]" value="usada" required></td>
+                                    <td><button type="button" class="btn-delete" onclick="removeRow(this)">X</button></td>
+                                </tr>
+                                <tr>
+                                    <td><input type="text" name="equipo[]" value="Cargador" required></td>
+                                    <td><input type="text" name="marca[]" value="DELL" required></td>
+                                    <td><input type="text" name="modelo[]" value="65 W" required></td>
+                                    <td><input type="text" name="serie[]" value="S/N" required></td>
+                                    <td><input type="text" name="estado[]" value="usada" required></td>
+                                    <td><button type="button" class="btn-delete" onclick="removeRow(this)">X</button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Datos de Firma y Entrega -->
+                    <div class="card full-width">
+                        <h3>Firma y Conformidad</h3>
+                        <div class="form-row">
+                            <div class="field-group">
+                                <label>Nombre de quien entrega (Técnico / Responsable):</label>
+                                <input type="text" name="nombre_entrega" placeholder="Ej. Jorge Espejel" required>
+                            </div>
+                        </div>
+                        <div class="signature-section">
+                            <label>Firma Digital del Colaborador que recibe:</label>
+                            <div class="canvas-container">
+                                <canvas id="signatureCanvas" width="500" height="150"></canvas>
+                                <button type="button" id="btnClearSignature" class="btn-small">Limpiar Firma</button>
+                            </div>
+                            <input type="hidden" name="firma_base64" id="firmaBase64">
+                        </div>
+                    </div>
+
+                    <div class="actions-bar">
+                        <button type="submit" class="btn-primary">Guardar y Generar PDF</button>
+                    </div>
+                </form>
             </section>
         </main>
     </div>
+
+    <script src="/static/js/main.js"></script>
 </body>
 </html>
